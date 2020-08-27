@@ -8,7 +8,7 @@ Unsubscribing/Deleting a subscription.
 
 ```
 Request :
-curl -sS -X DELETE https://api.jacob.run/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
+curl -sS -X DELETE https://api.jacob.services/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
 
 ```
 
