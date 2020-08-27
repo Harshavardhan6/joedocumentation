@@ -8,28 +8,15 @@ The Main idea behind this API is to allow users to place orders by themselves wi
 
 Users have the opportunity to place the orders via this Customer order API. All the user needs to have is a [OpenTRANS](https://www.digital.iao.fraunhofer.de/de/publikationen/OpenTRANS21.html) XML file. This API takes the user's XML file and places the order at Jacob. If the order was successfully placed, the user receives a success response. If the order has any errors, the user gets notified about the problem, enabling him/her to make appropriate changes to the order.
 
-```plantuml
-@startuml
-
-actor User
-
-User -> CustomerOrderApi : OpenTRANS XML
-
-CustomerOrderApi --> User : if "Order Ok" then "Order successfully placed."
-
-CustomerOrderApi --> User : if "Order Error" then " Sorry, the Order XML has some errors, please make the following changes to continue"
-
-@enduml
-
-```  
+![](images/orderdoc.PNG)
 
 ## Order Information
-Base-url : https://api.jacob.run/1.0/joe
+Base-url : https://api.jacob.services/1.0/joe
 
 | Url | Method | Short Description | Details Page |
 | :--- | :--- | :--- | :--- |
-| `Base-url?apikey=4711` | `GET` | Retrieves a list of all orders. | [Link](customerOrderApi/getOrders.md) |
-| `Base-url?apikey=4711` | `POST` | Creates a new order. | [Link](customerOrderApi/createOrder.md) |
+| `Base-url?apikey=9876` | `GET` | Retrieves a list of all orders. | [Link](customerOrderApi/getOrders.md) |
+| `Base-url?apikey=9876` | `POST` | Creates a new order. | [Link](customerOrderApi/createOrder.md) |
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -37,24 +24,14 @@ Base-url : https://api.jacob.run/1.0/joe
 
 The CustomerOrder API also serves its users with documents like, Orders, Invoices, DispatchNotes, OrderResponses. After successfully placing the order, the user can use the orderId to retrieve different documents related to the placed order. This also allows means for checking if a certain document is available yet.
 
-```plantuml
-@startuml
-
-actor User
-
-User -> CustomerOrderApi : makes a request for documents with an orderId (order,invoice, dispatch, orderresponse)
-
-CustomerOrderApi --> User : returns the XML documents  
-
-@enduml
-```
+![](images/docpol.PNG)
 
 ## Documents Polling Information
-Base-url : https://api.jacob.run/1.0/joe
+Base-url : https://api.jacob.services/1.0/joe
 
 | Url | Method | Short Description | Details Page |
 | :--- | :--- | :--- | :--- |
-| `Base-url/orderId/document?apikey=4711` | `GET` | Retrieves the different documents related to a particular order with the given orderId. | [Link](documentPolling/documentPolling.md) |
+| `Base-url/orderId/document?apikey=9876` | `GET` | Retrieves the different documents related to a particular order with the given orderId. | [Link](documentPolling/documentPolling.md) |
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -69,108 +46,18 @@ Example events :
 
 For this, the User has to make a subscription. Subscription API allows users to make subscriptions (or) register their endpoints and subscribe to specific events/state changes of the order, this registered endpoint is then notified letting the user know about the changes in their order.
 
-```plantuml
-@startuml
+![](images/subapi.PNG)
 
-actor User
-
-User -> SubscriptionApi : register their endpoint by making a subscription
-
-SubscriptionApi --> User : if "Subscription Ok" then "Successfully subscribed"
-
-@enduml
-```
 Users have the possibility to subscribe to specific events or can subscribe to all the available events.
 
-A Subscription looks like this : 
- ```json
- {
-  "event": "invoice.generated",
-  "creator": "4711|tool|manual",
-  "identifier": {
-       "type": "customerId",
-       "value": "4711"
-   },
-   "webhook": {
-       "url": "https://example.customerendpoint.com/webhook"
-   }
-}
- ```
-
-Subscription with Webhook Authentication type basic :
-```json
-{
-  "event": "invoice.generated",
-  "creator": "4711|tool|manual",
-  "identifier": {
-       "type": "customerId",
-       "value": "4711"
-   },
-   "webhook": {
-       "url": "https://example.customerendpoint.com/webhook",
-       "authentication": {
-           "type" : "basic",
-           "user" : "foo",
-           "password": "baa",
-       }
-   }
-}
-```
-
-Subscription with Webhook Authentication type header :
-```json
-{
-  "event": "invoice.generated",
-  "creator": "4711|tool|manual",
-  "identifier": {
-       "type": "customerId",
-       "value": "4711"
-   },
-   "webhook": {
-       "url": "https://example.customerendpoint.com/webhook",
-       "authentication": {
-           "type" : "header",
-           "header" : "x-api-key",
-           "key": "fooBaa4711Lulu",
-       }
-   }
-}
-```
-
-Subscription with Webhook Authentication type queryParam :
-```json
-{
-  "event": "invoice.generated",
-  "creator": "4711|tool|manual",
-  "identifier": {
-       "type": "customerId",
-       "value": "4711"
-   },
-   "webhook": {
-       "url": "https://example.customerendpoint.com/webhook",
-       "authentication": {
-           "type" : "queryParam",
-           "queryParam" : "apikey",
-           "key": "fooBaa4711Lulu",
-       }
-   }
-}
-```
- 
-```
-* event          - It is the event on which the user wants to subscribe for.
-* creator        - name of the creator.
-* identifier     - Identifier has a type, which can be a customerId or an orderId and its corresponding value.
-* webhook        - url here is the user's endpoint, which they want to register and this url gets notified whenever there is a change in the state of the order , depending on the events which the user subscribed to.
-
-```
+What is a subscription ? [Link](webhookSubscriptionApi/subscription.md)
 
 # Subscription Information
-Base-url : https://api.jacob.run/1.0/events/subscriptions
+Base-url : https://api.jacob.services/1.0/events/subscriptions
 
 | Url | Method | Short Description | Details Page |
 | :--- | :--- | :--- | :--- |
-| `Base-url?apikey=abcdefghijklmnop` | `GET` | Retrieves all the subscriptions of a user. | [Link](webhookSubscriptionApi/getSubscriptions.md)|
+| `Base-url?apikey=abcdefghijklmnop` | `GET` | Retrieves a list of subscriptions of a user, with specific Event & Identifier. | [Link](webhookSubscriptionApi/getSubscriptions.md)|
 | `Base-url?apikey=abcdefghijklmnop` | `POST` | Creates a subscription. | [Link](webhookSubscriptionApi/createSubscription.md)|
 | `Base-url/{subscriptionId}?apikey=abcdefghijklmnop` | `GET` | Retrieves a specific subscription with a subscriptionId. | [Link](webhookSubscriptionApi/getSubscription.md)|
 | `Base-url/{subscriptionId}?apikey=abcdefghijklmnop` | `PUT` | Replaces the whole subscription and updates it | [Link](webhookSubscriptionApi/putSubscription.md)|
