@@ -10,7 +10,7 @@ Retrieves the different documents related to a particular order with the given o
 Document types : Order, Invoice, Dispatch, Response.
 
 Request :
-    curl -sS -X GET -H "Accept: application/xml" https://api.jacob.run/1.0/joe/orderId/document?apikey=4711
+    curl -sS -X GET -H "Accept: application/xml" https://api.jacob.services/1.0/joe/orderId/document?apikey=9876
 
 ```
 
@@ -21,3 +21,5 @@ Responses :
     400 - Bad Request.
     406 - The request contained an unsupported 'Accept' header.
 ```
+--------------------------------------------------------------------------------------
+Example Response : 
