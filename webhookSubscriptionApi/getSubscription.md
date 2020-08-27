@@ -8,7 +8,7 @@ retrieves a specific subscription with a subscriptionId.
 
 ```
 Request :
-curl -sS -X GET -H "Accept: application/json"  https://api.jacob.run/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
+curl -sS -X GET -H "Accept: application/json"  https://api.jacob.services/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
 
 ```
 
@@ -18,8 +18,8 @@ Responses :
     400 - Bad Request.
     404 - Notfound.
 ```
-
-Example Response for 200-Ok :
+--------------------------------------------------------------------------------------
+Example Response for 200-Ok : Returns the subscription with the requested subscriptionId
 
 ```json
   {
