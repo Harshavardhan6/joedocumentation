@@ -92,6 +92,124 @@ This is an example of a OpenTRANS XML document:
 	</ORDER_SUMMARY>
 </ORDER>
 ``` 
+
+XML Definition : 
+
+```xml
+<ORDER_INFO>
+    <ORDER_ID></ORDER_ID>
+    <ORDER_DATE></ORDER_DATE>
+    <LANGUAGE></LANGUAGE>
+    <CURRENCY></CURRENCY>
+    <CUSTOMER_ORDER_REFERENCE>
+        <ORDER_ID></ORDER_ID>
+    </CUSTOMER_ORDER_REFERENCE>
+    <ORDER_PARTIES_REFERENCE>
+        <BUYER_IDREF></BUYER_IDREF>
+        <SUPPLIER_IDREF></SUPPLIER_IDREF>
+    </ORDER_PARTIES_REFERENCE>
+</ORDER_INFO>
+```
+| XML Field | Description | More information | data type | example value |
+| -------------- | :--------- | ----------:| ----------:|----------:| 
+| &lt;ORDER_INFO&gt; |  administrative information on the order is summarized | - | - | - |
+| &lt;ORDER_ID&gt; | The orderId of the user | - | string | 987654321 |
+| &lt;ORDER_DATE&gt; | Date of the order  | format :yyyy-MM-dd'T'HH:mm:ss | date | 2020-08-10T10:05:38 |
+| &lt;LANGUAGE&gt;  | Language | - | string | ger(german) |
+| &lt;CURRENCY&gt;  | Currency information | - | string | EUR |
+| &lt;CUSTOMER_ORDER_REFERENCE&gt;  |  related to an item and refers to the previous order where the item was ordered by the customer (purchasing party) | - | - | - |
+| &lt;ORDER_ID&gt; |  Unique order number of the buyer/ orderId of the user  | Same as mentioned in the ORDER_INFO->ORDER_ID | string | 987654321 |
+| &lt;ORDER_PARTIES_REFERENCE&gt;  |  related to an item and refers to the previous order where the item was ordered by the customer (purchasing party) | - | - | - |
+| &lt;BUYER_IDREF&gt;  |  reference to the buyer|  The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element buyer) | string | 112233 |
+| &lt;SUPPLIER_IDREF&gt; | reference to the supplier| The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element supplier) | string | 556677 |
+------------------------------------------------------------------------------------------------------------
+
+```xml
+<ORDER_INFO>
+    <PARTIES>
+        <PARTY>
+            <PARTY_ID></PARTY_ID>
+            <PARTY_ROLE></PARTY_ROLE>
+		<ADDRESS>
+		    <NAME></NAME>
+		    <NAME2></NAME2>
+			<STREET></STREET>
+			<ZIP></ZIP>
+			<CITY></CITY>
+			<COUNTRY></COUNTRY>
+			<COUNTRY_CODED></COUNTRY_CODED>
+			<EMAIL></EMAIL>
+		</ADDRESS>
+        </PARTY>
+	</PARTIES>
+</ORDER_INFO>
+```
+| XML Field | Description | More information | data type | example value |
+| -------------- | :--------- | ----------:| ----------:|----------:|
+| &lt;PARTIES&gt; |  List of parties that are relevant to this business document | - | - | - |
+| &lt;PARTY&gt; |   Information about a business partner | - | - | - |
+| &lt;PARTY_ID&gt; |    Unique identifier ID of the business partner |  buyer_specific/customer_specific/supplier_specific  | string | 1234567 |
+| &lt;PARTY_ROLE&gt; |     Role of the business partner in the context of this document | - | string | buyer/supplier/delivery |
+| &lt;ADDRESS&gt; |     Address information of a business partner  | - | - | - |
+| &lt;NAME&gt; |      Name of the organisation/salutation   | - | string | JACOB Elektronik GmbH/ Herr |
+| &lt;NAME2&gt; |      Additional space for name   |  name of the specific individual | string | Max Mustermann |
+| &lt;STREET&gt; |      Street name and house number  | - | string | Musterstraße 123 |
+| &lt;ZIP&gt; |      ZIP code of address   | - | string | 12345 |
+| &lt;CITY&gt; |       Town or city of the company   | - | string | Musterstadt |
+| &lt;COUNTRY&gt; |       Country   | - | string | Deutschland |
+| &lt;COUNTRY_CODED&gt; |       Code of the Country   | - | string | DE |
+| &lt;EMAIL&gt; |       e-mail address   | - | string | someone@example.com |
+------------------------------------------------------------------------------------------------------------
+
+```xml
+<ORDER_ITEM_LIST>
+    <ORDER_ITEM>
+        <LINE_ITEM_ID></LINE_ITEM_ID>
+        <PRODUCT_ID>
+            <SUPPLIER_PID></SUPPLIER_PID>
+            <BUYER_PID></BUYER_PID>
+            <DESCRIPTION_SHORT></DESCRIPTION_SHORT>
+        </PRODUCT_ID>
+        <QUANTITY></QUANTITY>
+        <ORDER_UNIT></ORDER_UNIT>
+        <PRODUCT_PRICE_FIX>
+            <PRICE_AMOUNT></PRICE_AMOUNT>
+        </PRODUCT_PRICE_FIX>
+		<PRICE_LINE_AMOUNT></PRICE_LINE_AMOUNT>
+    </ORDER_ITEM>
+</ORDER_ITEM_LIST>
+```
+| XML Field | Description | More information | data type | example value |
+| -------------- | :--------- | ----------:| ----------:|----------:|
+| &lt;ORDER_ITEM_LIST&gt;  |  represents the lists of items in the order | - | - | - |
+| &lt;ORDER_ITEM&gt;  | contains order information about exactly one item |  Any number of item lines can be used, although at least one item line must be used | - | - |
+| &lt;LINE_ITEM_ID&gt;  |  The item ID number is used to uniquely identify the item line of an order within that order | - | string | 1 |
+| &lt;PRODUCT_ID&gt;  |  Identifier of the product | - | - | - |
+| &lt;SUPPLIER_PID&gt;  | Supplier's product ID | - | string | 430324 |
+| &lt;BUYER_PID&gt;  | Product ID of the buying company  | - | string | 999999999 |
+| &lt;DESCRIPTION_SHORT&gt;  | short description of the product | - | string | Haselnusstafel |
+| &lt;QUANTITY&gt;  |  Quantity  | - | - | 2 |
+| &lt;ORDER_UNIT&gt;  | Unit in which the product can be ordered | It is only possible to order multiples of the product unit. | string | C62 |
+| &lt;PRODUCT_PRICE_FIX&gt;  |  A fixed product price  | - | - | - |
+| &lt;PRICE_AMOUNT&gt;  |  Amount of the price of order item  | - | int | 10.45 |
+| &lt;PRICE_LINE_AMOUNT&gt;  | The total price of the item-line | (PRICE_AMOUNT*QUANTITY) | int | 20.90 |
+```
+* PRICE_LINE_AMOUNT In the normal case the value results from multiplying  but has to be explicitly quoted. The element PRICE_LINE_ AMOUNT can result from multiplying PRICE_AMOUNT and PRICE_UNIT_VALUE if the price is not connected to the ordered unit but to another price-unit.
+```
+------------------------------------------------------------------------------------------------------------
+
+```xml
+<ORDER_SUMMARY>
+    <TOTAL_ITEM_NUM></TOTAL_ITEM_NUM>
+    <TOTAL_AMOUNT></TOTAL_AMOUNT>
+</ORDER_SUMMARY>
+```
+| XML Field | Description | More information | data type | example value |
+| -------------- | :--------- | ----------:| ----------:|----------:|
+| &lt;ORDER_SUMMARY&gt;  | The summary contains information on the number of item lines in the order | This figure is used for control purposes to make sure that all items have been transferred | - | - |
+| &lt;TOTAL_ITEM_NUM&gt;  |  Contains the total number of item lines in the business document | - | count | 1 |
+| &lt;TOTAL_AMOUNT&gt;  |  Total amount covering all items in this business document.  | - | - | 20.90 |
+
   
 - POST:
       consumes:
@@ -102,7 +220,7 @@ This is an example of a OpenTRANS XML document:
 
 ```
 Request :
-curl -vsS -X POST -H "Content-Type: application/xml" -d @joe_order.user_order.xml https://api.jacob.run/1.0/joe?apikey=12345
+curl -vsS -X POST -H "Content-Type: application/xml" -d @joe_order.user_order.xml https://api.jacob.services/1.0/joe?apikey=9876
 
 ```
 
@@ -112,56 +230,7 @@ Responses :
     400 - Bad Request.
     409 - An order with this Id already exists.
 ```
+--------------------------------------------------------------------------------------
+Example Response : 
 
-XML Definition : 
-
-
-| XML Field | Description | More information | data type | example value |
-| -------------- | :--------- | ----------:| ----------:|----------:|
-| ORDER_INFO |  administrative information on the order is summarized | - | - | - |
-| ORDER_ID | The orderId of the user | - | string | 987654321 |
-| ORDER_DATE | Date of the order  | format :yyyy-MM-dd'T'HH:mm:ss | date | 2020-08-10T10:05:38 |
-| LANGUAGE  | Language | - | string | ger(german) |
-| ------  | ----- | ------ | ----- | ----- |
-| PARTIES |  List of parties that are relevant to this business document | - | - | - |
-| PARTY |   Information about a business partner | - | - | - |
-| PARTY_ID |    Unique identifier ID of the business partner |  buyer_specific/customer_specific/supplier_specific  | string | 1234567 |
-| PARTY_ROLE |     Role of the business partner in the context of this document | - | string | buyer/supplier/delivery |
-| ADDRESS |     Address information of a business partner  | - | - | - |
-| NAME |      Name of the organisation/salutation   | - | string | JACOB Elektronik GmbH/ Herr |
-| NAME2 |      Additional space for name   |  name of the specific individual | string | Max Mustermann |
-| STREET |      Street name and house number  | - | string | Musterstraße 123 |
-| ZIP |      ZIP code of address   | - | string | 12345 |
-| CITY |       Town or city of the company   | - | string | Musterstadt |
-| COUNTRY |       Country   | - | string | Deutschland |
-| COUNTRY_CODED |       Code of the Country   | - | string | DE |
-| EMAIL |       e-mail address   | - | string | someone@example.com |
-| ------  | ----- | ------ | ----- | ----- |
-| CUSTOMER_ORDER_REFERENCE  |  related to an item and refers to the previous order where the item was ordered by the customer (purchasing party) | ------ | ----- | ----- |
-| ORDER_ID |  Unique order number of the buyer/ orderId of the user  | Same as mentioned in the ORDER_INFO->ORDER_ID | string | 987654321 |
-| ------  | ----- | ------ | ----- | ----- |
-| ORDER_PARTIES_REFERENCE  |  related to an item and refers to the previous order where the item was ordered by the customer (purchasing party) | ------ | ----- | ----- |
-| BUYER_IDREF  |  reference to the buyer|  The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element buyer) | string | 112233 |
-| SUPPLIER_IDREF | reference to the supplier| The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element supplier) | string | 556677 |
-| CURRENCY  | Currency information | ------ | string | EUR |
-| ------  | ----- | ------ | ----- | ----- |
-| ORDER_ITEM_LIST  |  represents the lists of items in the order | ------ | ----- | ----- |
-| ORDER_ITEM  | contains order information about exactly one item |  Any number of item lines can be used, although at least one item line must be used | ----- | ----- |
-| LINE_ITEM_ID  |  The item ID number is used to uniquely identify the item line of an order within that order | ------ | string | 1 |
-| PRODUCT_ID  |  Identifier of the product | ------ | ----- | ----- |
-| SUPPLIER_PID  | Supplier's product ID | ------ | string | 430324 |
-| BUYER_PID  | Product ID of the buying company  | ------ | string | 999999999 |
-| DESCRIPTION_SHORT  | short description of the product | ------ | string | Haselnusstafel |
-| QUANTITY  |  Quantity  | ------ | ----- | 2 |
-| ORDER_UNIT  | Unit in which the product can be ordered | It is only possible to order multiples of the product unit. | string | C62 |
-| PRODUCT_PRICE_FIX  |  A fixed product price  | ------ | ----- | ----- |
-| PRICE_AMOUNT  |  Amount of the price of order item  | ------ | int | 10.45 |
-| PRICE_LINE_AMOUNT  | The total price of the item-line | (PRICE_AMOUNT*QUANTITY) | int | 20.90 |
-| ORDER_SUMMARY  | The summary contains information on the number of item lines in the order | This figure is used for control purposes to make sure that all items have been transferred | ----- | ----- |
-| TOTAL_ITEM_NUM  |  Contains the total number of item lines in the business document | ------ | count | 1 |
-| TOTAL_AMOUNT  |  Total amount covering all items in this business document.  | ------ | ----- | 20.90 |
-
-```
-* PRICE_LINE_AMOUNT In the normal case the value results from multiplying  but has to be explicitly quoted. The element PRICE_LINE_ AMOUNT can result from multiplying PRICE_AMOUNT and PRICE_UNIT_VALUE if the price is not connected to the ordered unit but to another price-unit.
-```
 

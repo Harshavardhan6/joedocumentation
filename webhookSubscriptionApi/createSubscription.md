@@ -10,7 +10,7 @@ Request :
 Headers required - 
     Content-Type : application/json
 
-curl -sS -X POST -H "Content-Type: application/json" -d @user_subscription.json  https://api.jacob.run/1.0/events/subscriptions/?apikey=abcdefghijklmnop
+curl -sS -X POST -H "Content-Type: application/json" -d @user_subscription.json  https://api.jacob.services/1.0/events/subscriptions/?apikey=abcdefghijklmnop
 
 ```
 
@@ -19,7 +19,7 @@ Responses :
     201 - Status created, for a successful subscription, meaning a user has successfully subscribed to an event. Also gives the user a subscriptionId which can be used later.
     400 - Bad Request.
 ```
-
+--------------------------------------------------------------------------------------
 Example Response for a successful subscription 201-Status created : Returns the newly created subscription
 
 ```json
@@ -44,5 +44,4 @@ Example Response for a successful subscription 201-Status created : Returns the 
       "url": "string"
     }
   }
-
 ```

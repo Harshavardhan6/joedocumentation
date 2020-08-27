@@ -8,7 +8,7 @@ Replaces the complete existing subscription and updates it.
 
 ```
 Request :
-curl -sS -X PUT -H "Accept: application/json" -d @user_updatesubscription.json https://api.jacob.run/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
+curl -sS -X PUT -H "Accept: application/json" -d @user_updatesubscription.json https://api.jacob.services/1.0/events/subscriptions/{subscriptionId}?apikey=abcdefghijklmnop
 
 ```
 
@@ -18,8 +18,8 @@ Responses :
     400 - Bad Request.
     404 - Notfound.
 ```
-
-Example Response for 200-Ok : Returns a Updated Subscription
+--------------------------------------------------------------------------------------
+Example Response for 200-Ok : Returns an Updated Subscription
 
 ```json
   {
