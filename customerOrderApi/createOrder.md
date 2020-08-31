@@ -110,6 +110,7 @@ XML Definition :
     </ORDER_PARTIES_REFERENCE>
 </ORDER_INFO>
 ```
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:| 
 | &lt;ORDER_INFO&gt; |  administrative information on the order is summarized | - | - | - |
@@ -144,6 +145,7 @@ XML Definition :
 	</PARTIES>
 </ORDER_INFO>
 ```
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:|
 | &lt;PARTIES&gt; |  List of parties that are relevant to this business document | - | - | - |
@@ -179,6 +181,7 @@ XML Definition :
     </ORDER_ITEM>
 </ORDER_ITEM_LIST>
 ```
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:|
 | &lt;ORDER_ITEM_LIST&gt;  |  represents the lists of items in the order | - | - | - |
@@ -193,6 +196,7 @@ XML Definition :
 | &lt;PRODUCT_PRICE_FIX&gt;  |  A fixed product price  | - | - | - |
 | &lt;PRICE_AMOUNT&gt;  |  Amount of the price of order item  | - | int | 10.45 |
 | &lt;PRICE_LINE_AMOUNT&gt;  | The total price of the item-line | (PRICE_AMOUNT*QUANTITY) | int | 20.90 |
+
 ```
 * PRICE_LINE_AMOUNT In the normal case the value results from multiplying  but has to be explicitly quoted. The element PRICE_LINE_ AMOUNT can result from multiplying PRICE_AMOUNT and PRICE_UNIT_VALUE if the price is not connected to the ordered unit but to another price-unit.
 ```
@@ -204,6 +208,7 @@ XML Definition :
     <TOTAL_AMOUNT></TOTAL_AMOUNT>
 </ORDER_SUMMARY>
 ```
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:|
 | &lt;ORDER_SUMMARY&gt;  | The summary contains information on the number of item lines in the order | This figure is used for control purposes to make sure that all items have been transferred | - | - |
@@ -231,6 +236,8 @@ Responses :
     409 - An order with this Id already exists.
 ```
 --------------------------------------------------------------------------------------
-Example Response : 
+Example Response : Returns the location of the placed order in the Response Header.
+
+For a successfully placed order (201 Status Created), The response header contains the location of the placed order,  Location - https://api.jacob.services/1.0/joe/orderId/order, so the users can navigate to the particular location to take a look at their newly placed order.
 
 
