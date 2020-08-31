@@ -1,4 +1,4 @@
-# PLACE ORDER
+# Create/Place order
 
 ---
 Creates an order with the orderId of the user.
@@ -112,6 +112,7 @@ XML Definition :
 </ORDER_INFO>
 ```
 ------------------------------------------------------------------------------------------------------------
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:| 
 | &lt;ORDER_INFO&gt; |  administrative information on the order is summarized | - | - | - |
@@ -148,6 +149,7 @@ XML Definition :
 </ORDER_INFO>
 ```
 ------------------------------------------------------------------------------------------------------------
+
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:|
 | &lt;PARTIES&gt; |  List of parties that are relevant to this business document | - | - | - |
