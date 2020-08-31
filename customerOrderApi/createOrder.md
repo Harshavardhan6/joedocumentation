@@ -1,4 +1,4 @@
-# PLACE ORDER
+# Create/Place order
 
 ---
 Creates an order with the orderId of the user.
@@ -92,6 +92,7 @@ This is an example of a OpenTRANS XML document:
 	</ORDER_SUMMARY>
 </ORDER>
 ``` 
+------------------------------------------------------------------------------------------------------------
 
 XML Definition : 
 
@@ -110,6 +111,7 @@ XML Definition :
     </ORDER_PARTIES_REFERENCE>
 </ORDER_INFO>
 ```
+------------------------------------------------------------------------------------------------------------
 
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:| 
@@ -123,6 +125,7 @@ XML Definition :
 | &lt;ORDER_PARTIES_REFERENCE&gt;  |  related to an item and refers to the previous order where the item was ordered by the customer (purchasing party) | - | - | - |
 | &lt;BUYER_IDREF&gt;  |  reference to the buyer|  The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element buyer) | string | 112233 |
 | &lt;SUPPLIER_IDREF&gt; | reference to the supplier| The reference has to point to a (PARTY_ID) that is defined in the document (PARTY element supplier) | string | 556677 |
+
 ------------------------------------------------------------------------------------------------------------
 
 ```xml
@@ -145,6 +148,7 @@ XML Definition :
 	</PARTIES>
 </ORDER_INFO>
 ```
+------------------------------------------------------------------------------------------------------------
 
 | XML Field | Description | More information | data type | example value |
 | -------------- | :--------- | ----------:| ----------:|----------:|
@@ -161,6 +165,7 @@ XML Definition :
 | &lt;COUNTRY&gt; |       Country   | - | string | Deutschland |
 | &lt;COUNTRY_CODED&gt; |       Code of the Country   | - | string | DE |
 | &lt;EMAIL&gt; |       e-mail address   | - | string | someone@example.com |
+
 ------------------------------------------------------------------------------------------------------------
 
 ```xml
